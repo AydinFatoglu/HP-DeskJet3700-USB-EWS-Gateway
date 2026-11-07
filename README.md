@@ -12,6 +12,9 @@ Bu arıza durumunda normal fabrika sıfırlaması ayarı temizlemez. Yazıcını
 
 Bu proje, yazıcının sorunlu ağ HTTPS yolunu kullanmaz. Bilgisayara USB ile bağlı `MI_02` LEDM arayüzünden EWS'ye erişir ve içeriği yalnızca localhost üzerinde çalışan yerel bir HTTPS adresine taşır. Böylece ağ üzerinden artık açılamayan EWS alanlarına yeniden ulaşılabilir ve kilitlenmeye neden olan ayar yazıcının kendi yönetim arayüzünden geri alınabilir.
 
+Bu çözüm yalnızca HTTPS ayarı nedeniyle oluşan kilitlenmeyle sınırlı değildir. Yazıcı herhangi bir nedenle Wi‑Fi'a bağlanamadığında, DHCP'den IP alamadığında veya HP'nin mobil kurulum uygulaması ya da bilgisayardaki kurulum/destek yazılımı yazıcıya ulaşıp konfigürasyonları gönderemediğinde ağ EWS'sine erişmek de mümkün olmaz. Gateway, Wi‑Fi bağlantısına ve yazıcının IP sahibi olmasına ihtiyaç duymadan USB üzerinden EWS'yi açar. Kullanıcı buradan erişilebilen ağ ve cihaz ayarlarını değiştirebilir; tarayıcının gönderdiği yapılandırma istekleri USB üzerinden yazıcıya iletildiği için ayarlar yazıcıya kaydedilebilir.
+
+Araç Wi‑Fi bağlantısını kendiliğinden kurmaz veya kullanıcı adına bir ağ seçmez. HP uygulamalarının keşif ve kurulum yolu çalışmadığında, gerekli konfigürasyonun yazıcının kendi EWS arayüzünden gönderilip kaydedilebilmesi için alternatif ve doğrudan bir USB yönetim kanalı sağlar.
 Bu, HP tarafından sağlanan resmi bir araç değil; HP'nin bıraktığı kurtarma boşluğunu USB üzerinden aşmak için geliştirilmiş yerel bir geri kazanım çözümüdür.
 
 > **Uyarı:** Tarayıcıdaki ayar işlemleri USB üzerinden gerçek yazıcıya iletilir. Uygulama yalnızca `127.0.0.1` üzerinde kullanılmalı, LAN veya internete açılmamalıdır.
