@@ -2,6 +2,18 @@
 
 Windows üzerinde USB ile bağlı bir HP DeskJet 3700 yazıcının Embedded Web Server (EWS) arayüzünü yalnızca yerel bilgisayarda açan WinUSB–HTTP köprüsüdür. Yazıcının `MI_02` LEDM/HTTP trafiğini `https://127.0.0.1:8765/` adresine taşır.
 
+## Hangi sorunu çözüyor?
+
+HP DeskJet 3700'ün EWS arayüzünde sunulan güvenli bağlantı/HTTPS ayarı etkinleştirildiğinde yazıcının ağ üzerinden sunduğu yönetim arayüzü bazı durumlarda kullanılamaz hale gelebilir. Tarayıcı artık gerekli sayfalara ulaşamaz; ayarı geri alacak kontroller de erişilemeyen EWS alanlarının içinde kaldığı için kullanıcı bir kurtarma çıkmazına girer.
+
+Sorunun temelinde HP'nin bu ayarı kullanıcıya açmasına rağmen, ayar ağ EWS erişimini bozduğunda kullanılabilecek güvenilir bir geri dönüş yolu sunmaması vardır. Ayar etkinleştirildikten sonra erişilemeyen bölümler oluşabilir ve aynı arayüz üzerinden ayarı yeniden düzeltmek mümkün olmaz.
+
+Bu arıza durumunda normal fabrika sıfırlaması ayarı temizlemez. Yazıcının üzerindeki tuş kombinasyonuyla gerçekleştirilen fabrika sıfırlaması da bu ayarı geri almaz ve bu problem için kesinlikle çözüm değildir. Yazıcı sıfırlanmış gibi görünse bile EWS'yi erişilemez bırakan güvenli bağlantı durumu korunur.
+
+Bu proje, yazıcının sorunlu ağ HTTPS yolunu kullanmaz. Bilgisayara USB ile bağlı `MI_02` LEDM arayüzünden EWS'ye erişir ve içeriği yalnızca localhost üzerinde çalışan yerel bir HTTPS adresine taşır. Böylece ağ üzerinden artık açılamayan EWS alanlarına yeniden ulaşılabilir ve kilitlenmeye neden olan ayar yazıcının kendi yönetim arayüzünden geri alınabilir.
+
+Bu, HP tarafından sağlanan resmi bir araç değil; HP'nin bıraktığı kurtarma boşluğunu USB üzerinden aşmak için geliştirilmiş yerel bir geri kazanım çözümüdür.
+
 > **Uyarı:** Tarayıcıdaki ayar işlemleri USB üzerinden gerçek yazıcıya iletilir. Uygulama yalnızca `127.0.0.1` üzerinde kullanılmalı, LAN veya internete açılmamalıdır.
 
 ## Gereksinimler
