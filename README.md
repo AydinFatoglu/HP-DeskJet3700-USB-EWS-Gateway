@@ -87,6 +87,18 @@ Yalnızca `MI_02` arayüzüne WinUSB atanmalıdır. Diğer yazıcı arayüzlerin
 
 Tasarım, veri akışı, kısıtlar ve sorun giderme için [teknik dokümana](docs/TECHNICAL.md) bakın.
 
-## Kapsam
+## Desteklenen USB varyantı
 
-Bu sürüm `VID_03F0&PID_0653&MI_02` ve `FF/04/01` arayüz tanımına göre HP DeskJet 3700 ailesi için hazırlanmıştır. Başka model ve arayüzler desteklenmez.
+Bu ilk sürümün doğrulanmış hedefi **HP DeskJet 3700 series REST/WinUSB yönetim arayüzüdür**. HP'nin Windows sürücü paketindeki `HPWinUSBStub.INF` dosyası arayüzü tam olarak `HP DeskJet 3700 series(REST_WinUSB)` adıyla tanımlar.
+
+- Ürün ailesi: `HP DeskJet 3700 series`
+- HP INF teknik adı: `HP DeskJet 3700 series(REST_WinUSB)`
+- USB donanım kimliği: `USB\VID_03F0&PID_0653&MI_02`
+- USB arayüz tanımı: `FF/04/01`
+- Arayüz görevi: HP REST/LEDM yönetim trafiğinin WinUSB üzerinden taşınması
+
+Bu teknik ad tek bir yazıcının seri numarası, anakart USB portu, fiziksel hub adresi veya belirli bir 3720/3755 gibi perakende alt model garantisi değildir. Aynı donanım kimliğini kullanan DeskJet 3700 ailesi arayüzünü belirtir. Repository'de test edilen yazıcının gerçek seri numarası bulunmaz ve cihaz seçiminde seri numarası kullanılmaz.
+
+Eşleşen orijinal HP sürücü paketi kuruluysa `MI_02` arayüzü HP'nin kendi `HPWinUSBStub.INF` dosyası tarafından WinUSB'a bağlanabilir; bu durumda ayrıca üçüncü taraf bir WinUSB sürücüsü kurmak gerekmez. Belirleyici koşul, çalışma anında bu arayüzün WinUSB olarak erişilebilir olmasıdır.
+
+Başka PID kullanan DeskJet 3700 donanım revizyonları veya farklı HP ürün aileleri bu sürüm tarafından otomatik olarak desteklenmez.
