@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hp-deskjet3700-usb-ews-gateway"
+version = "1.0.0"
+description = "Localhost-only USB gateway for the HP DeskJet 3700 Embedded Web Server"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["Brotli>=1.1", "cryptography>=42"]
+classifiers = [
+  "Environment :: Win32 (MS Windows)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+
+[project.scripts]
+hp-usb-ews-gateway = "hp_deskjet3700_usb_ews_gateway:main"
+
+[tool.setuptools]
+py-modules = ["hp_deskjet3700_usb_ews_gateway"]

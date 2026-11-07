@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+HP_USB_EWS_Gateway/
+localhost-cert.pem
+localhost-key.pem
+*.key
+*.pem
+*.log
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
