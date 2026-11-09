@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="HP DeskJet 3700 HTTPS erişim sorununun USB LEDM ve Python EWS Gateway yardımıyla çözülmesinin teknik başarı hikâyesi.">
+<title>Başarı Hikâyesi | HP DeskJet 3700 HTTPS Engeli Nasıl Aşıldı?</title>
+<style>
+:root{--ink:#183047;--muted:#597085;--navy:#09283b;--navy2:#0f4156;--teal:#0b8d8c;--aqua:#71dfd1;--pale:#eff9f7;--line:#d9e6eb;--paper:#fff;--bg:#f2f6f8;--gold:#f8c46a;--red:#d46f62}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Inter,Arial,sans-serif;line-height:1.65}a{color:#087b89;text-decoration:none}a:hover{text-decoration:underline}code{font-family:Cascadia Code,Consolas,monospace;font-size:.9em;background:#eaf0f3;border-radius:5px;padding:2px 5px;overflow-wrap:anywhere}button{font:inherit;cursor:pointer}.wrap{width:min(1100px,calc(100% - 40px));margin:auto}
+header{background:#fff;border-bottom:1px solid #e4ecee;position:sticky;top:0;z-index:10;box-shadow:0 2px 16px #0c253508}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:66px}.brand{font-weight:800;display:flex;align-items:center;gap:10px;color:#13394b}.brand-icon{display:grid;place-items:center;background:#d7f4ee;border-radius:10px;width:32px;height:32px;color:#0a7b77}.navlinks{display:flex;align-items:center;gap:23px;font-size:13px;font-weight:650}.print{background:#123c50;border:0;color:#fff;border-radius:8px;padding:10px 14px;font-weight:650}.print:hover{background:#0c596a}
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(circle at 90% 15%,#176275 0%,transparent 37%),linear-gradient(120deg,#081e32 0%,#0b384b 73%,#0d6570 100%);padding:72px 0 78px}.hero:after{content:"";position:absolute;width:470px;height:470px;border:1px solid #6fc0c233;border-radius:50%;right:-150px;top:-220px;box-shadow:0 0 0 78px #85dacc08,0 0 0 155px #85dacc06}.hero-grid{display:grid;grid-template-columns:1.55fr .65fr;gap:25px;align-items:center;position:relative;z-index:1}.eyebrow{color:var(--aqua);text-transform:uppercase;font-size:12px;letter-spacing:2.5px;font-weight:800}.hero h1{font-size:clamp(37px,5vw,64px);line-height:1.11;letter-spacing:-2.7px;margin:13px 0 21px;max-width:780px}.hero h1 em{font-style:normal;color:#98e9dc}.hero p{max-width:700px;color:#d0e5eb;font-size:17px;line-height:1.8}.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:29px}.chip{border:1px solid #b6ecea55;background:#ffffff0d;padding:8px 12px;border-radius:30px;font-size:12px;color:#e6f4f6}.illustration{position:relative;background:#ffffff0b;border:1px solid #8fd3d14c;border-radius:22px;padding:30px 22px;text-align:center;box-shadow:0 15px 60px #0002}.illustration svg{display:block;width:min(100%,240px);margin:auto}.ill-cap{font-size:11px;letter-spacing:1.7px;text-transform:uppercase;color:#b3e7e5;margin-top:12px}.pulse{width:8px;height:8px;background:#6de3b9;display:inline-block;border-radius:50%;margin-right:7px;box-shadow:0 0 0 5px #6de3b922}
+main section{scroll-margin-top:92px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:-34px;position:relative;z-index:2}.stat{background:white;border:1px solid #e0eaec;border-radius:14px;padding:21px;box-shadow:0 13px 35px #0e2b3412}.stat .big{font-size:26px;font-weight:850;color:#0d5360;line-height:1.2}.stat .name{font-size:12px;color:var(--muted);margin-top:7px}.stat .tag{display:inline-block;color:#077f7b;font-size:10px;font-weight:800;letter-spacing:1.2px;margin-bottom:8px;text-transform:uppercase}.section-header{margin:72px 0 25px;max-width:840px}.section-header .kicker{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.section-header h2{font-size:clamp(27px,3.2vw,37px);line-height:1.2;letter-spacing:-1px;margin:8px 0 12px}.section-header p{color:var(--muted);margin:0;max-width:760px}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{border:1px solid var(--line);background:#fff;border-radius:16px;padding:26px 28px}.panel h3{font-size:18px;margin:0 0 15px}.panel p{color:#526778;margin:0}.panel ul{margin:0;padding-left:19px;color:#526778}.panel li+li{margin-top:10px}.panel.problem{border-top:4px solid #d8887c}.panel.solution{border-top:4px solid #0eaaa0}.state{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px}.state.b{color:#b55f58}.state.a{color:#008679}
+.ribbon{background:#0a3549;color:#e2f5f4;border-radius:16px;padding:23px 30px;display:flex;gap:22px;align-items:center;justify-content:space-between;margin-top:22px}.ribbon strong{color:#fff;font-size:18px}.ribbon p{margin:3px 0 0;font-size:13px;color:#b7d8df}.ribbon .arrows{color:#93dbd1;font-size:27px;white-space:nowrap}
+.timeline{position:relative;max-width:940px;margin:20px 0 0 13px}.timeline:before{content:"";position:absolute;top:15px;bottom:35px;left:24px;width:2px;background:linear-gradient(#7dd6c9,#c5dde4)}.step{display:grid;grid-template-columns:50px minmax(0,1fr);gap:20px;position:relative;margin-bottom:18px}.step-mark{display:flex;justify-content:center;padding-top:19px}.step-mark span{z-index:1;display:grid;place-items:center;width:44px;height:44px;background:#eefaf8;color:#087d7e;border:2px solid #55c5b8;border-radius:50%;font-size:13px;font-weight:900;box-shadow:0 0 0 6px var(--bg)}.step-content{background:#fff;border:1px solid var(--line);border-radius:15px;padding:21px 25px 20px;box-shadow:0 4px 18px #0d2e3f08}.step-content .meta{display:flex;justify-content:space-between;align-items:center}.phase-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#0d8680;font-weight:850}.mini-icon{color:#69a5ac;font-weight:800;min-width:22px;text-align:center}.step-content h3{margin:6px 0 8px;font-size:19px;letter-spacing:-.4px}.step-content p{margin:0;color:#52687a;font-size:14px}.outcome{background:#f3faf8;border-left:3px solid #52beac;border-radius:0 7px 7px 0;margin-top:14px;padding:9px 13px}.outcome span{font-weight:900;color:#15877e;font-size:10px;letter-spacing:1.4px;text-transform:uppercase}.outcome p{font-size:13px;color:#3a6570}.step.done .step-content{border:2px solid #49baa4;background:linear-gradient(135deg,#fff 60%,#eafbf4)}.step.done .step-mark span{background:#0d8e80;color:white;border-color:#0d8e80}
+.scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:18px}.score{background:white;border:1px solid var(--line);border-radius:15px;padding:23px}.score strong{display:block;margin-bottom:9px;color:#183e50}.score p{color:#587184;font-size:13px;margin:0}.score pre{margin:12px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#ccefe6;background:#0d2b39;padding:15px;border-radius:9px;font-family:Cascadia Code,Consolas,monospace;font-size:12px;line-height:1.8}
+.lessons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lesson{background:#fff;border:1px solid var(--line);padding:23px;border-radius:14px}.lesson b{display:block;font-size:14px;margin-bottom:9px}.lesson p{font-size:13px;color:#5c7180;margin:0}.lesson .symbol{background:#dff7f0;color:#098a80;border-radius:8px;padding:5px 10px;display:inline-block;margin-bottom:13px;font-weight:800}
+.conclusion{margin:70px 0 45px;padding:34px;background:linear-gradient(110deg,#0a3548,#0c5760);border-radius:20px;color:#fff}.conclusion .badge{font-size:11px;color:#8becd8;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}.conclusion h2{font-size:31px;margin:10px 0;letter-spacing:-.7px}.conclusion p{max-width:830px;color:#cfe9eb}.footnote{font-size:12px;color:#718595;line-height:1.8}.footnote strong{color:#4b6777}.footer{padding:24px 0 40px;border-top:1px solid var(--line);font-size:12px;color:#78909c;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:780px){.hero-grid{grid-template-columns:1fr}.illustration{display:none}.stats{grid-template-columns:repeat(2,1fr)}.intro,.scoreboard{grid-template-columns:1fr}.lessons{grid-template-columns:1fr 1fr}.navlinks a{display:none}.hero{padding:55px 0 68px}}
+@media(max-width:520px){.wrap{width:min(100% - 24px,1100px)}.stats{gap:8px}.stat{padding:16px}.stat .big{font-size:21px}.timeline{margin-left:0}.step{gap:10px;grid-template-columns:40px 1fr}.timeline:before{left:19px}.step-mark span{width:36px;height:36px}.step-content{padding:17px}.lessons{grid-template-columns:1fr}.ribbon{display:block}.ribbon .arrows{display:none}.hero h1{letter-spacing:-1.5px}}
+@media print{header,.print{display:none!important}.hero{padding:35px 0;background:#fff;color:#122d3c;border-bottom:3px solid #157e82}.hero h1,.hero h1 em{color:#153e4b}.hero p{color:#435b68}.hero .eyebrow{color:#117e77}.chip{border:1px solid #cadde1;color:#456}.illustration{display:none}.hero-grid{display:block}.stats{margin-top:20px}.stat,.step-content,.panel,.score,.lesson{box-shadow:none;break-inside:avoid}.timeline:before{background:#abc}.section-header{margin-top:36px}.conclusion{background:#effaf8;color:#163d4c}.conclusion h2,.conclusion p{color:#164451}.ribbon{background:#f0f7f8;color:#133}.ribbon p,.ribbon strong{color:#224}.wrap{width:96%}body{background:#fff}a{color:#195} }
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="brand"><span class="brand-icon">✦</span> TEKNİK VAKA / 2026</div><nav class="navlinks"><a href="#hikaye">Hikâye</a><a href="#zaman-cizelgesi">Zaman çizelgesi</a><a href="#teknik">Teknik kayıt</a><button class="print" onclick="window.print()">Yazdır / PDF</button></nav></div></header>
+<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">Gerçek bir sorun giderme hikâyesi · 6–7 Kasım 2026</div><h1>Bir yazıcının <em>HTTPS kilidini</em> açmak.</h1><p>HP DeskJet 3700’ün erişilemeyen yönetim ekranlarından USB LEDM keşfine, çalışan Python geçidine ve sonunda modern tarayıcılarla yeniden açılan HTTPS arayüzüne uzanan yolculuk.</p><div class="chips"><span class="chip">HP DeskJet Ink Advantage 3700</span><span class="chip">Windows + PowerShell + Python</span><span class="chip">USB / WinUSB / LEDM</span><span class="chip">Ev ağı</span></div></div><div class="illustration"><svg viewBox="0 0 260 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Yazıcı ve bağlantı şeması"><rect x="55" y="21" width="150" height="84" rx="11" fill="#E7FAFA"/><path d="M74 43h111M74 60h88M74 77h97" stroke="#A0D9DA" stroke-width="7" stroke-linecap="round"/><rect x="24" y="81" width="212" height="97" rx="18" fill="#B4EDE5"/><rect x="38" y="101" width="184" height="54" rx="9" fill="#0A4255"/><circle cx="202" cy="112" r="6" fill="#6EE8C8"/><rect x="62" y="141" width="136" height="62" rx="7" fill="#F6FFFF"/><path d="M77 162h103M77 178h88" stroke="#98D7D8" stroke-width="7" stroke-linecap="round"/><path d="m155 35 16-15 17 15" stroke="#73DBCB" stroke-width="7" stroke-linecap="round"/></svg><div class="ill-cap"><span class="pulse"></span> Yönetim erişimi geri kazanıldı</div></div></div></section>
+<main class="wrap">
+<section class="stats" aria-label="Önemli sonuçlar"><div class="stat"><span class="tag">Çalışma süresi</span><div class="big">8–10 saat</div><div class="name">İki güne yayılan tahmini toplam</div></div><div class="stat"><span class="tag">İlk engel</span><div class="big">TLS alert 40</div><div class="name">HTTPS el sıkışması başarısızdı</div></div><div class="stat"><span class="tag">Dönüm noktası</span><div class="big">HTTP 200</div><div class="name">USB LEDM üzerinden ilk gerçek yanıt</div></div><div class="stat"><span class="tag">Son durum</span><div class="big">Erişim var</div><div class="name">Modern tarayıcıdan HTTPS yönetimi</div></div></section>
+<section id="hikaye"><div class="section-header"><span class="kicker">01 / Görev ve sonuç</span><h2>Küçük bir yazıcı, beklenmedik kadar büyük bir problem</h2><p>Amaç bir ağın güvenliğini yeniden tasarlamak değildi. Evdeki yazıcının yönetim ayarlarına gerektiğinde erişebilmekti.</p></div>
+<div class="intro"><div class="panel problem"><span class="state b">Başlangıç</span><h3>HTTP çalışıyordu, HTTPS kapalı kapıydı.</h3><ul><li>Yazıcı HTTP üzerinden görüntülenebiliyordu.</li><li>Hassas ayar sayfaları kendiliğinden HTTPS’ye geçiyordu.</li><li>Güncel ve eski tarayıcılarda TLS bağlantısı kurulamıyordu.</li><li>Normal sertifika uyarısını kabul etme seçeneği sorunu çözmüyordu.</li></ul></div><div class="panel solution"><span class="state a">Bitiş</span><h3>Yönetim yeniden erişilebilir oldu.</h3><ul><li>USB üzerinden HP LEDM yönetim servisine ulaşıldı.</li><li>Yerel bir Python geçidiyle EWS’nin bütün sayfaları açıldı.</li><li>İlgili HTTPS/güvenlik ayarı EWS içinde bulundu ve değiştirildi.</li><li>Kullanıcı modern tarayıcıdan HTTPS ile gezinmeyi doğruladı.</li></ul></div></div>
+<div class="ribbon"><div><strong>Temel yaklaşım: Soruna başka bir kapıdan girmek.</strong><p>HTTPS çalışmayınca HTTPS’ye daha fazla yüklenmek yerine, aynı yönetim servisine USB LEDM kanalından erişildi.</p></div><div class="arrows">HTTP ↔ USB ↔ EWS</div></div></section>
+<section id="zaman-cizelgesi"><div class="section-header"><span class="kicker">02 / Adım adım</span><h2>Denemeler, çıkmazlar ve kırılma anları</h2><p>Bu çizelge konuşmada paylaşılan komut çıktıları ve ekran görüntülerine dayanır. Saatler, kayıtların bulunduğu yerlerde belirtilmiştir; tüm çalışma için kesintisiz zaman ölçümü yapılmamıştır.</p></div><div class="timeline"><article class="step " id="adim-01">
+      <div class="step-mark"><span>01</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">06 Kasım</span><span class="mini-icon">◎</span></div>
+        <h3>Ağ erişimini yeniden kurduk</h3>
+        <p>Başlangıçta yazıcı ev Wi-Fi ağına bağlanmakta ve yönetim ekranlarını açmakta zorlanıyordu. Windows tarafındaki HP uygulamasıyla kablosuz bağlantı yeniden çalışır hâle geldi.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Wi-Fi bağlantısı kuruldu; EWS HTTP adresinden erişilebilir oldu.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-02">
+      <div class="step-mark"><span>02</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">06–07 Kasım</span><span class="mini-icon">!</span></div>
+        <h3>HTTPS el sıkışmasında kilitlendik</h3>
+        <p>HTTP üzerinden EWS ana sayfası açılıyor, fakat güvenlik ve sertifika sayfalarında HTTPS bağlantısı başarısız oluyordu. Firefox <code>SSL_ERROR_NO_CYPHER_OVERLAP</code>; OpenSSL denemeleri TLS <code>alert 40 / handshake_failure</code> bildiriyordu. TLS 1.0–1.2 ve çeşitli AES şifre takımları denendi.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Bir “sertifikaya güvenmiyorum” uyarısından farklı olarak TLS oturumu kurulamıyordu.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-03">
+      <div class="step-mark"><span>03</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · 14:29</span><span class="mini-icon">◫</span></div>
+        <h3>Sorunun tetiklendiği ekranı yakaladık</h3>
+        <p>Firefox geliştirici araçlarında, HP EWS’nin bir onay penceresinden sonra <code>http://</code> adresinden <code>https://</code> adresine geçtiğini gördük. Wi-Fi Direct ve sertifika sayfaları da bu geçişten etkileniyordu.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Sorunu yalnızca tarayıcıya değil, yönetim sayfalarının HTTPS geçişine bağladık.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-04">
+      <div class="step-mark"><span>04</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım</span><span class="mini-icon">{ }</span></div>
+        <h3>HP LEDM servislerini keşfettik</h3>
+        <p><code>/DevMgmt/DiscoveryTree.xml</code>, <code>NetAppsDyn.xml</code> ve güvenlik yetenekleri gibi XML kaynaklarını inceledik. Genel <code>HTTPSRedirection</code> değeri zaten <code>disabled</code> görünüyordu; güvenlik gerektiren kaynaklara normal ağ HTTP erişimi ise yönlendiriliyordu.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Tek bir genel yönlendirme anahtarı, sayfa bazlı HTTPS davranışını açıklamıyordu.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-05">
+      <div class="step-mark"><span>05</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım</span><span class="mini-icon">◇</span></div>
+        <h3>Fabrika sıfırlama API’sini bulduk, kullanmadık</h3>
+        <p><code>/ProductActions/ProductActionsManifest.xml</code> içindeki <code>FactoryDefaults</code>, <code>PowerCycle</code> ve <code>ResetOnNextBoot</code> işlemlerinin <code>PUT</code> ve <code>SecureAccess=true</code> gerektirdiğini doğruladık. Fiziksel sıfırlama denemesi de kayıtlı Wi-Fi’yi temizlememişti.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Çalışan ağ bağlantısını kaybetmemek için kontrolsüz bir sıfırlama yerine alternatif erişime yöneldik.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-06">
+      <div class="step-mark"><span>06</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım</span><span class="mini-icon">⇄</span></div>
+        <h3>USB’nin gizli yönetim kanalını belirledik</h3>
+        <p>USB tanımlayıcılarında <code>MI_02</code> üzerinde üreticiye özgü <code>FF/04/01</code> arayüzünü, <code>0x04 OUT</code> ve <code>0x85 IN</code> Bulk endpoint’lerini bulduk. HPLIP’in LEDM/EWS USB yaklaşımını Windows’ta WinUSB ile uyarladık.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Yazıcının HTTPS bağlantısına bağımlı olmayan bir yönetim kanalı bulundu.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-07">
+      <div class="step-mark"><span>07</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · 18:07</span><span class="mini-icon">✓</span></div>
+        <h3>İlk USB HTTP 200 yanıtını aldık</h3>
+        <p>İlk denemede sıfır baytlık USB okuması nedeniyle yanıtı kaçırıyorduk. Boş paketlerden sonra okumaya devam eden sürümle <code>GET /DevMgmt/ProductConfigDyn.xml</code> isteğine <code>HTTP/1.1 200 OK</code> geldi.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Windows → WinUSB → HP LEDM → HTTP/XML hattı gerçek cihazda doğrulandı.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-08">
+      <div class="step-mark"><span>08</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · 18:11–18:23</span><span class="mini-icon">▣</span></div>
+        <h3>HTTPS güvenlik yapılandırmasını ve sertifikayı okuduk</h3>
+        <p>USB üzerinden <code>SecurityDyn.xml</code> okuduk: <code>StrictSecureConnect=off</code>, <code>EncryptionStrength=low</code>. Ardından <code>SecurityCap.xml</code> AES şifre takımlarını; <code>DeviceCertificates/1/Info</code> ise SHA-256 imzalı, RSA 2048-bit, 2022–2032 geçerli sertifikayı gösterdi.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Sertifikanın süresi dolmamıştı. Güvenlik yetenekleri ile aktif yapılandırmayı birbirinden ayırdık.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-09">
+      <div class="step-mark"><span>09</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · 18:36</span><span class="mini-icon">{ }</span></div>
+        <h3>USB kanalının yazma yeteneğini sorguladık</h3>
+        <p><code>OPTIONS /DevMgmt/SecurityDyn.xml</code> isteği <code>Allow: GET, PUT</code> döndürdü. Buna rağmen sırf izin ilan edildi diye rastgele yapılandırma değişiklikleri yapmadık.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Yönetim API’sini tanıdık; önceliği arayüze erişmeye verdik.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-10">
+      <div class="step-mark"><span>10</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım</span><span class="mini-icon">⌘</span></div>
+        <h3>Python USB EWS Gateway geliştirdik</h3>
+        <p>USB LEDM yanıtlarını bilgisayarda <code>127.0.0.1</code> üstünden tarayıcıya sunan bir yerel köprü geliştirdik. İlk sürümlerde yerel HTTPS hataları, gzip ile sıkıştırılmış HTML’nin bozuk görünmesi ve tarayıcı önbelleğinden gelen <code>304</code> yanıtlarıyla uğraştık.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Gzip açma, cache başlıkları ve geçit davranışı düzeltildi.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-11">
+      <div class="step-mark"><span>11</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · 20:05 sonrası</span><span class="mini-icon">⚙</span></div>
+        <h3>USB kopmasının gerçek kaynağını ayırdık</h3>
+        <p>Bir aşamada Windows yazıcı yerine <code>VID_0000&amp;PID_0002</code> “Device Descriptor Request Failed” aygıtı görüyordu. Sürücü ve kuyruk temizliği tek başına çözmedi. USB-A ↔ USB-B kablosu değiştirildikten sonra <code>VID_03F0&amp;PID_0653</code> ve <code>MI_02</code> yeniden <code>OK</code> oldu.</p>
+        <div class="outcome"><span>Çıkarım</span><p>USB sorunu, sürücüden çok önceki fiziksel bağlantı/kablo ile ilişkiliydi.</p></div>
+      </div>
+    </article>
+<article class="step " id="adim-12">
+      <div class="step-mark"><span>12</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım</span><span class="mini-icon">#</span></div>
+        <h3>Windows port engelini de aştık</h3>
+        <p>Yerel geçit <code>8768</code> portunda <code>WinError 10013</code> alıyordu. Windows’a boş yerel port seçtirince sunucu açıldı; ekranda örnek olarak <code>127.0.0.1:30507</code> adresindeki EWS düzgün görüntülendi.</p>
+        <div class="outcome"><span>Çıkarım</span><p>HP EWS’nin bütün menüleri USB köprüsü üzerinden kullanılabilir hâle geldi.</p></div>
+      </div>
+    </article>
+<article class="step done" id="adim-13">
+      <div class="step-mark"><span>13</span></div>
+      <div class="step-content">
+        <div class="meta"><span class="phase-label">07 Kasım · Sonuç</span><span class="mini-icon">★</span></div>
+        <h3>Doğru EWS ayarını bulduk ve erişimi geri kazandık</h3>
+        <p>Tüm sayfalarda gezinebildikten sonra EWS içindeki ilgili HTTPS/güvenlik ayarı bulundu ve değiştirildi. Son doğrulamayı kullanıcı yaptı: artık modern tarayıcılarda gerekli güvenlik uyarısı kabul edilerek HTTPS üzerinden normal şekilde gezilebiliyor.</p>
+        <div class="outcome"><span>Çıkarım</span><p>Hedef gerçekleşti: Ayarlar, geçide bağımlı kalmadan yeniden erişilebilir.</p></div>
+      </div>
+    </article></div></section>
+<section id="teknik"><div class="section-header"><span class="kicker">03 / Teknik kanıtlar</span><h2>Hikâyeyi doğrulayan dört kayıt</h2><p>Bu kayıtlar, aynı cihazda hangi katmanın çalışıp hangisinin sorun çıkardığını ayırmamızı sağladı.</p></div><div class="scoreboard"><div class="score"><strong>1 · Ağdaki TLS hatası</strong><p>Normal ağ HTTPS erişiminde bağlantı sertifika doğrulamasına bile geçemiyordu.</p><pre>Firefox: SSL_ERROR_NO_CYPHER_OVERLAP
+OpenSSL: handshake_failure (alert 40)
+HTTP EWS: erişilebilir</pre></div><div class="score"><strong>2 · USB LEDM yönetimi</strong><p>Gerçek USB bulk kanalı üzerinden standart HTTP/XML sorgusu çalıştı.</p><pre>MI_02 · FF/04/01
+EP OUT: 0x04 · IN: 0x85
+GET /DevMgmt/SecurityDyn.xml
+HTTP/1.1 200 OK</pre></div><div class="score"><strong>3 · Okunan aktif güvenlik değerleri</strong><p>Mevcut ayarlar ile desteklenen yetenekler birbirinden ayrıldı.</p><pre>StrictSecureConnect = off
+EncryptionStrength  = low
+HTTPSRedirection    = disabled
+Certificate valid   = 2022–2032</pre></div><div class="score"><strong>4 · Son kullanıcı doğrulaması</strong><p>Yerel geçit üzerinden tüm yönetim menüleri açıldı. Ayar değişikliğinin ardından normal tarayıcı erişimi geri geldi.</p><pre>USB Gateway   → EWS tam görünüm
+EWS menüleri  → Çalışıyor
+HTTPS ayarı   → Kullanıcı değiştirdi
+Modern Firefox → HTTPS erişimi başarılı</pre></div></div></section>
+<section id="dersler"><div class="section-header"><span class="kicker">04 / Öğrendiklerimiz</span><h2>Bu vakayı özel yapan neydi?</h2></div><div class="lessons"><div class="lesson"><span class="symbol">01</span><b>Sertifika tarihi her şey değildir.</b><p>Geçerli bir sertifika kayıtlıyken TLS el sıkışması yine de başarısız olabilir.</p></div><div class="lesson"><span class="symbol">02</span><b>Üreticinin USB arayüzü ikinci bir yönetim yoludur.</b><p>Yazdırma arabiriminden farklı WinUSB/LEDM arayüzü HTTP/XML yanıtları verdi.</p></div><div class="lesson"><span class="symbol">03</span><b>0 baytlık USB okuması iletişimin bittiği anlamına gelmez.</b><p>Boş paket sonrasında devam eden okumalar gerçek yanıtı ortaya çıkardı.</p></div><div class="lesson"><span class="symbol">04</span><b>Proxy katmanındaki küçük ayrıntılar belirleyicidir.</b><p>Gzip çözme, 304 önbellek yanıtları ve yerel port tahsisi ayrı ayrı çözüldü.</p></div><div class="lesson"><span class="symbol">05</span><b>USB hatasını yazılım sanmak kolaydır.</b><p>Device Descriptor hatası sürücü silindikten sonra da sürdü; yeni kabloyla normal kimlik geri geldi.</p></div><div class="lesson"><span class="symbol">06</span><b>Gerçek hedefe odaklanmak çözümü hızlandırır.</b><p>Gereksiz firmware yenilemesi ve fabrika sıfırlaması yerine yönetim ekranına erişim sağlandı.</p></div></div></section>
+<section class="conclusion"><span class="badge">Sonuç / Başarı</span><h2>Yazıcının yönetim kapısı yeniden açıldı.</h2><p>İki güne yayılan yaklaşık 8–10 saatlik teknik araştırma; ağ analizi, PowerShell testleri, HP LEDM keşfi, Windows WinUSB iletişimi, Python HTTP geçidi, tarayıcı sorun giderme ve fiziksel USB kablo değişimi ile sonuca ulaştı. En önemlisi: çözüm sonunda yalnızca bir araçta değil, kullanıcının normal tarayıcı deneyiminde doğrulandı.</p><p><strong>Başarı ölçütü:</strong> Kullanıcı artık güncel tarayıcıdan HTTPS güvenlik uyarısını kabul ederek HP EWS sayfalarında gezinebiliyor.</p></section>
+<p class="footnote"><strong>Doğruluk notu:</strong> Son EWS değişikliğinin tam menü/alan adı konuşmada kaydedilmedi; bu raporda özellikle uydurulmadı. HTTPS hatasının tekil kök nedeni yalnızca bu bilgilerle kesin kriptografik düzeyde teşhis edilmiş sayılmaz. “8–10 saat” aktif uğraş için yaklaşık bir tahmindir; 7 Kasım kayıtlarında 14:29–20:05 arasında en az 5 saat 36 dakika geçmiştir. IP adresi ve cihaz tanımlayıcıları yalnızca teknik bağlam için kullanılmış; seri numarası rapora eklenmemiştir.</p>
+</main><footer class="wrap footer"><span>HP DeskJet 3700 · Teknik başarı hikâyesi</span><span>6–7 Kasım 2026 · Yerel, tek dosyalık HTML raporu</span></footer>
+</body></html>
